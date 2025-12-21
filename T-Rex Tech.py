@@ -7,6 +7,15 @@ st.set_page_config(
     page_icon="🦖"
 )
 
+# ---------- MODO MANTENIMIENTO ----------
+if st.secrets.get("MAINTENANCE_MODE", False):
+    st.title("🦖 T-Rex Tech")
+    st.markdown("---")
+    st.error("🚧 **Lo siento, página cerrada**")
+    st.info("🔧 Siendo actualizada por **T-Rex Tech**")
+    st.stop()
+# ---------------------------------------
+
 st.title("🦖 T-Rex Tech")
 st.subheader("Reparación de celulares")
 
@@ -22,9 +31,10 @@ st.markdown("---")
 st.header("📩 Solicitar reparación")
 
 with st.form("contacto"):
-    nombre = st.text_input("Nombre")
-    modelo = st.text_input("Modelo del celular")
-    problema = st.text_area("Describe el problema")
+    nombre = st.text_input("Nombre *")
+    celular = st.text_input("Número de celular (opcional)")
+    modelo = st.text_input("Modelo del celular *")
+    problema = st.text_area("Describe el problema *")
     enviar = st.form_submit_button("Enviar solicitud")
 
 if enviar:
@@ -37,7 +47,9 @@ if enviar:
 
             email.set_content(f"""
 Nombre: {nombre}
+Celular: {celular if celular else "No proporcionado"}
 Modelo: {modelo}
+
 Problema:
 {problema}
             """)
@@ -50,10 +62,10 @@ Problema:
                 smtp.send_message(email)
 
             st.success("✅ Solicitud enviada correctamente")
-        except Exception as e:
+        except Exception:
             st.error("❌ Error al enviar el mensaje")
     else:
-        st.warning("⚠️ Completa todos los campos")
+        st.warning("⚠️ Completa los campos obligatorios (*)")
 
 st.markdown("---")
 st.link_button(
@@ -62,3 +74,4 @@ st.link_button(
 )
 
 st.caption("Servicio local • Atención por mensaje")
+
