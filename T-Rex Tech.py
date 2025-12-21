@@ -24,7 +24,8 @@ st.markdown("""
 - Cambio de pantalla  
 - Cambio de batería  
 - Centro de carga  
-- Limpieza y diagnóstico  
+- Limpieza y diagnóstico 
+- y mas
 """)
 
 st.markdown("---")
