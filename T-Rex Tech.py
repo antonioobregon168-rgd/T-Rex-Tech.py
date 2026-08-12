@@ -8,7 +8,7 @@ st.set_page_config(
 )
 
 # ---------- MODO MANTENIMIENTO ----------
-if st.secrets.get("MAINTENANCE_MODE",True):
+if st.secrets.get("MAINTENANCE_MODE",False):
     st.title("🦖 T-Rex Tech")
     st.markdown("---")
     st.error("🚧 **Lo siento, página cerrada**")
